@@ -1,0 +1,2 @@
+import {useAuth} from "../context/AuthContext.jsx";
+export default function Profile(){const {user}=useAuth();return <div><div className="page-head"><div><h1>Profile</h1><p className="muted">Your account information</p></div></div><div className="panel profile-card"><div className="profile-avatar">{user?.name?.[0]}</div><h2>{user?.name}</h2><p>{user?.email}</p><span className="badge active">{user?.role}</span><hr/><div className="info-grid"><div><small>Department</small><b>{user?.department||"General"}</b></div><div><small>Account</small><b>Active</b></div></div></div></div>}

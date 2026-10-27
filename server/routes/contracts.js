@@ -1,0 +1,16 @@
+import { Router } from "express";
+import { protect, allow } from "../middleware/auth.js";
+import * as c from "../controllers/contractController.js";
+const router = Router();
+router.use(protect);
+router.get("/dashboard", c.dashboard);
+router.get("/", c.listContracts);
+router.post("/", allow("Admin","Contract Manager"), c.createContract);
+router.get("/:id", c.getContract);
+router.put("/:id", allow("Admin","Contract Manager"), c.updateContract);
+router.delete("/:id", allow("Admin","Contract Manager"), c.deleteContract);
+router.post("/:id/submit", allow("Admin","Contract Manager"), c.submitContract);
+router.post("/:id/approve", allow("Admin","Approver"), c.approveContract);
+router.post("/:id/reject", allow("Admin","Approver"), c.rejectContract);
+router.post("/:id/renew", allow("Admin","Contract Manager"), c.renewContract);
+export default router;
